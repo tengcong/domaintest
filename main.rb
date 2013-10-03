@@ -33,92 +33,80 @@ class Domains < Sinatra::Base
   end
 
   def run
-  numbers = (1 ... 999).to_a
-  letters = ('a' .. 'z').to_a
-  digitals = (0 .. 9).to_a
-  SURFIX.each do |surfix|
+    numbers = (1 ... 999).to_a
+    letters = ('a' .. 'z').to_a
+    digitals = (0 .. 9).to_a
+    SURFIX.each do |surfix|
 
-    Thread.new do
-      letters.each do |a|
-        letters.each do |b|
-          letters.each do |c|
-            domain_name = "#{a}#{b}#{c}#{surfix}"
-            test domain_name
+      Thread.new do
+        digitals.each do |a|
+          digitals.each do |b|
+            digitals.each do |c|
+              domain_name = "#{a}#{b}#{c}#{surfix}"
+              test domain_name
+            end
           end
         end
       end
-    end
 
-    Thread.new do
-      digitals.each do |d|
+      Thread.new do
         letters.each do |a|
           letters.each do |b|
-            domain_name = "#{a}#{b}#{d}#{surfix}"
-            test domain_name
-
-            domain_name = "#{b}#{a}#{d}#{surfix}"
-            test domain_name
-
-            domain_name = "#{b}#{d}#{a}#{surfix}"
-            test domain_name
-
-            domain_name = "#{a}#{d}#{b}#{surfix}"
-            test domain_name
-
-            domain_name = "#{d}#{a}#{b}#{surfix}"
-            test domain_name
-
-            domain_name = "#{d}#{b}#{a}#{surfix}"
-            test domain_name
-
+            letters.each do |c|
+              domain_name = "#{a}#{b}#{c}#{surfix}"
+              test domain_name
+            end
           end
         end
       end
-    end
 
-    Thread.new do
-      digitals.each do |a|
-        digitals.each do |b|
-          letters.each do |d|
-            domain_name = "#{a}#{b}#{d}#{surfix}"
-            test domain_name
+      Thread.new do
+        digitals.each do |d|
+          letters.each do |a|
+            letters.each do |b|
+              domain_name = "#{a}#{b}#{d}#{surfix}"
+              test domain_name
 
-            domain_name = "#{b}#{a}#{d}#{surfix}"
-            test domain_name
+              domain_name = "#{b}#{a}#{d}#{surfix}"
+              test domain_name
 
-            domain_name = "#{b}#{d}#{a}#{surfix}"
-            test domain_name
+              domain_name = "#{b}#{d}#{a}#{surfix}"
+              test domain_name
 
-            domain_name = "#{a}#{d}#{b}#{surfix}"
-            test domain_name
+              domain_name = "#{a}#{d}#{b}#{surfix}"
+              test domain_name
 
-            domain_name = "#{d}#{a}#{b}#{surfix}"
-            test domain_name
+              domain_name = "#{d}#{a}#{b}#{surfix}"
+              test domain_name
 
-            domain_name = "#{d}#{b}#{a}#{surfix}"
-            test domain_name
+              domain_name = "#{d}#{b}#{a}#{surfix}"
+              test domain_name
+
+            end
           end
         end
       end
-    end
 
-    Thread.new do
-      digitals.each do |a|
-        digitals.each do |b|
-          digitals.each do |c|
-            domain_name = "#{a}#{b}#{c}#{surfix}"
-            test domain_name
-          end
-        end
-      end
-    end
+      Thread.new do
+        digitals.each do |a|
+          digitals.each do |b|
+            letters.each do |d|
+              domain_name = "#{a}#{b}#{d}#{surfix}"
+              test domain_name
 
-    Thread.new do
-      digitals.each do |a|
-        digitals.each do |b|
-          digitals.each do |c|
-            digitals.each do |d|
-              domain_name = "#{a}#{b}#{c}#{d}#{surfix}"
+              domain_name = "#{b}#{a}#{d}#{surfix}"
+              test domain_name
+
+              domain_name = "#{b}#{d}#{a}#{surfix}"
+              test domain_name
+
+              domain_name = "#{a}#{d}#{b}#{surfix}"
+              test domain_name
+
+              domain_name = "#{d}#{a}#{b}#{surfix}"
+              test domain_name
+
+              domain_name = "#{d}#{b}#{a}#{surfix}"
               test domain_name
             end
           end
@@ -126,22 +114,35 @@ class Domains < Sinatra::Base
       end
     end
 
-    Thread.new do
-      digitals.each do |a|
-        digitals.each do |b|
-          digitals.each do |c|
-            digitals.each do |d|
-              digitals.each do |e|
-                domain_name = "#{a}#{b}#{c}#{d}#{e}#{surfix}"
+    [SURFIX.first].each do |surfix|
+      Thread.new do
+        digitals.each do |a|
+          digitals.each do |b|
+            digitals.each do |c|
+              digitals.each do |d|
+                domain_name = "#{a}#{b}#{c}#{d}#{surfix}"
                 test domain_name
               end
             end
           end
         end
       end
-    end
 
-  end
+      Thread.new do
+        digitals.each do |a|
+          digitals.each do |b|
+            digitals.each do |c|
+              digitals.each do |d|
+                digitals.each do |e|
+                  domain_name = "#{a}#{b}#{c}#{d}#{e}#{surfix}"
+                  test domain_name
+                end
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
 
@@ -154,7 +155,7 @@ class Domains < Sinatra::Base
   get '/availables' do
     str = '<ul>'
     @available.each do |domain|
-      str << "<li style='float: left'><a href='https://www.name.com/domain/search/#{domain}'>#{domain}</li>"
+      str << "<li style='float: left'><a href='https://www.name.com/domain/search/#{domain}'>#{domain}</li>&nbsp;&nbsp;"
     end
     str << "</ul>"
     str
