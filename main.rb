@@ -1,35 +1,37 @@
 require 'sinatra'
 require 'whois'
 
-
 class Domains < Sinatra::Base
-
 
   SURFIX = ['.com', '.net']
 
-  numbers = (1 ... 999).to_a
-  letters = ('a' .. 'z').to_a
-  digitals = (0 .. 9).to_a
 
-  limit = Time.now + 60*60*24*7
+  def initialize
+    @numbers = (1 ... 999).to_a
+    @letters = ('a' .. 'z').to_a
+    @digitals = (0 .. 9).to_a
 
-  available = []
-  errorz = []
-  recent = []
+    @limit = Time.now + 60*60*24*7
 
-  def test domain_name, available, errorz
+    @available = []
+    @errorz = []
+    @recent = []
+  end
+
+
+  def test domain_name
     begin
       if Whois.whois(domain_name).available?
-        available.push domain_name
-        available.push ['gooo']
+        @available.push domain_name
+        @available.push ['gooo']
       else
         expire = Whois.whois(domain_name).expires_on
         if expire < limit
-          recent.push({ domain_name => expire.day })
+          @recent.push({ domain_name => expire.day })
         end
       end
     rescue
-      errorz.push domain_name
+      @errorz.push domain_name
     end
   end
 
@@ -40,8 +42,7 @@ class Domains < Sinatra::Base
         letters.each do |b|
           letters.each do |c|
             domain_name = "#{a}#{b}#{c}#{surfix}"
-            # puts "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
           end
         end
       end
@@ -52,28 +53,22 @@ class Domains < Sinatra::Base
         letters.each do |a|
           letters.each do |b|
             domain_name = "#{a}#{b}#{d}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{b}#{a}#{d}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{b}#{d}#{a}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{a}#{d}#{b}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{d}#{a}#{b}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{d}#{b}#{a}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
           end
         end
@@ -85,28 +80,22 @@ class Domains < Sinatra::Base
         digitals.each do |b|
           letters.each do |d|
             domain_name = "#{a}#{b}#{d}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{b}#{a}#{d}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{b}#{d}#{a}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{a}#{d}#{b}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{d}#{a}#{b}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
 
             domain_name = "#{d}#{b}#{a}#{surfix}"
-            logger.info "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
           end
         end
       end
@@ -117,8 +106,7 @@ class Domains < Sinatra::Base
         digitals.each do |b|
           digitals.each do |c|
             domain_name = "#{a}#{b}#{c}x#{surfix}"
-            # puts "test: #{domain_name} ..."
-            test domain_name, available, errorz
+            test domain_name
           end
         end
       end
@@ -130,8 +118,7 @@ class Domains < Sinatra::Base
           digitals.each do |c|
             digitals.each do |d|
               domain_name = "#{a}#{b}#{c}#{d}#{surfix}"
-              # puts "test: #{domain_name} ..."
-              test domain_name, available, errorz
+              test domain_name
             end
           end
         end
@@ -145,8 +132,7 @@ class Domains < Sinatra::Base
             digitals.each do |d|
               digitals.each do |e|
                 domain_name = "#{a}#{b}#{c}#{d}#{e}#{surfix}"
-                # puts "test: #{domain_name} ..."
-                test domain_name, available, errorz
+                test domain_name
               end
             end
           end
