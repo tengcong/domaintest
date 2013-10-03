@@ -7,9 +7,6 @@ class Domains < Sinatra::Base
 
 
   def initialize
-    @numbers = (1 ... 999).to_a
-    @letters = ('a' .. 'z').to_a
-    @digitals = (0 .. 9).to_a
 
     @limit = Time.now + 60*60*24*7
 
@@ -27,7 +24,7 @@ class Domains < Sinatra::Base
         @available.push ['gooo']
       else
         expire = Whois.whois(domain_name).expires_on
-        if expire < limit
+        if expire < @limit
           @recent.push({ domain_name => expire.day })
         end
       end
@@ -37,6 +34,9 @@ class Domains < Sinatra::Base
   end
 
   def run
+  numbers = (1 ... 999).to_a
+  letters = ('a' .. 'z').to_a
+  digitals = (0 .. 9).to_a
   SURFIX.each do |surfix|
 
     Thread.new do
