@@ -21,6 +21,7 @@ class Domains < Sinatra::Base
     begin
       if Whois.whois(domain_name).available?
         available.push domain_name
+        available.push ['gooo']
       else
         expire = Whois.whois(domain_name).expires_on
         if expire < limit
