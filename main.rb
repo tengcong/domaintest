@@ -16,6 +16,7 @@ class Domains < Sinatra::Base
     @available = []
     @errorz = []
     @recent = []
+    run()
   end
 
 
@@ -35,6 +36,7 @@ class Domains < Sinatra::Base
     end
   end
 
+  def run
   SURFIX.each do |surfix|
 
     Thread.new do
@@ -141,6 +143,8 @@ class Domains < Sinatra::Base
     end
 
   end
+  end
+
 
   get '/' do
     "<a href='/availables'>availables</a><br>
@@ -150,7 +154,7 @@ class Domains < Sinatra::Base
 
   get '/availables' do
     str = '<ul>'
-    available.each do |domain|
+    @available.each do |domain|
       str << "<li>#{domain}</li>"
     end
     str << "</ul>"
@@ -159,7 +163,7 @@ class Domains < Sinatra::Base
 
   get '/recent' do
     str = '<ul>'
-    recent.each do |domain|
+    @recent.each do |domain|
       str << "<li>#{domain}</li>"
     end
     str << "</ul>"
@@ -168,7 +172,7 @@ class Domains < Sinatra::Base
 
   get '/errors' do
     str = '<ul>'
-    errorz.each do |domain|
+    @errorz.each do |domain|
       str << "<li>#{domain}</li>"
     end
     str << "</ul>"
