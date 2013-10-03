@@ -3,11 +3,10 @@ require 'whois'
 
 class Domains < Sinatra::Base
 
-  SURFIX = ['.com', '.net']
-
+  # SURFIX = ['.com', '.net']
+  SURFIX = ['.cc', '.me', '.info']
 
   def initialize
-
     @limit = Time.now + 60*60*24*7
 
     @available = []
@@ -15,7 +14,6 @@ class Domains < Sinatra::Base
     @recent = []
     run()
   end
-
 
   def test domain_name
     begin
@@ -55,89 +53,6 @@ class Domains < Sinatra::Base
             letters.each do |c|
               domain_name = "#{a}#{b}#{c}#{surfix}"
               test domain_name
-            end
-          end
-        end
-      end
-
-      Thread.new do
-        digitals.each do |d|
-          letters.each do |a|
-            letters.each do |b|
-              domain_name = "#{a}#{b}#{d}#{surfix}"
-              test domain_name
-
-              domain_name = "#{b}#{a}#{d}#{surfix}"
-              test domain_name
-
-              domain_name = "#{b}#{d}#{a}#{surfix}"
-              test domain_name
-
-              domain_name = "#{a}#{d}#{b}#{surfix}"
-              test domain_name
-
-              domain_name = "#{d}#{a}#{b}#{surfix}"
-              test domain_name
-
-              domain_name = "#{d}#{b}#{a}#{surfix}"
-              test domain_name
-
-            end
-          end
-        end
-      end
-
-      Thread.new do
-        digitals.each do |a|
-          digitals.each do |b|
-            letters.each do |d|
-              domain_name = "#{a}#{b}#{d}#{surfix}"
-              test domain_name
-
-              domain_name = "#{b}#{a}#{d}#{surfix}"
-              test domain_name
-
-              domain_name = "#{b}#{d}#{a}#{surfix}"
-              test domain_name
-
-              domain_name = "#{a}#{d}#{b}#{surfix}"
-              test domain_name
-
-              domain_name = "#{d}#{a}#{b}#{surfix}"
-              test domain_name
-
-              domain_name = "#{d}#{b}#{a}#{surfix}"
-              test domain_name
-            end
-          end
-        end
-      end
-    end
-
-    [SURFIX.first].each do |surfix|
-      Thread.new do
-        digitals.each do |a|
-          digitals.each do |b|
-            digitals.each do |c|
-              digitals.each do |d|
-                domain_name = "#{a}#{b}#{c}#{d}#{surfix}"
-                test domain_name
-              end
-            end
-          end
-        end
-      end
-
-      Thread.new do
-        digitals.each do |a|
-          digitals.each do |b|
-            digitals.each do |c|
-              digitals.each do |d|
-                digitals.each do |e|
-                  domain_name = "#{a}#{b}#{c}#{d}#{e}#{surfix}"
-                  test domain_name
-                end
-              end
             end
           end
         end
