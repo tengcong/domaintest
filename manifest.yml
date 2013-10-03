@@ -1,0 +1,8 @@
+---
+applications:
+- name: domains
+  memory: 1G
+  instances: 2
+  host: domains
+  domain: cfapps.io
+  path: .
