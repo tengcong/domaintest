@@ -155,7 +155,7 @@ class Domains < Sinatra::Base
   get '/availables' do
     str = '<ul>'
     @available.each do |domain|
-      str << "<li style='float: left'><a href='https://www.name.com/domain/search/#{domain}'>#{domain}</li>&nbsp;&nbsp;"
+      str << "<li style='float: left; margin-right: 15px'><a href='https://www.name.com/domain/search/#{domain}'>#{domain}</li>"
     end
     str << "</ul>"
     str
@@ -164,7 +164,7 @@ class Domains < Sinatra::Base
   get '/recent' do
     str = '<ul>'
     @recent.each do |domain|
-      str << "<li style='float: left'>#{domain}</li>"
+      str << "<li style='float: left; margin-right: 15px'>#{domain}</li>"
     end
     str << "</ul>"
     str
@@ -173,7 +173,7 @@ class Domains < Sinatra::Base
   get '/errors' do
     str = '<ul>'
     @errorz.each do |domain|
-      str << "<li style='float: left'>#{domain}</li>"
+      str << "<li style='float: left; margin-right: 15px'>#{domain}</li>"
     end
     str << "</ul>"
     str
