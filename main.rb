@@ -21,7 +21,6 @@ class Domains < Sinatra::Base
     begin
       if Whois.whois(domain_name).available?
         @available.push domain_name
-        @available.push ['gooo']
       else
         expire = Whois.whois(domain_name).expires_on
         if expire < @limit
@@ -107,7 +106,7 @@ class Domains < Sinatra::Base
       digitals.each do |a|
         digitals.each do |b|
           digitals.each do |c|
-            domain_name = "#{a}#{b}#{c}x#{surfix}"
+            domain_name = "#{a}#{b}#{c}#{surfix}"
             test domain_name
           end
         end
