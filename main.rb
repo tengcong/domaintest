@@ -8,6 +8,7 @@ class Domains < Sinatra::Base
   # SURFIX = ['.cc', '.me', '.info']
 
   def initialize
+    super
     @limit = Time.now + 60*60*24*7
 
     @available = []
@@ -32,7 +33,7 @@ class Domains < Sinatra::Base
   end
 
   def run
-    puts '.... start ....'
+    puts '....start ....'
     numbers = (1 ... 999).to_a
     letters = ('a' .. 'z').to_a
     digitals = (0 .. 9).to_a
@@ -51,12 +52,12 @@ class Domains < Sinatra::Base
 
       Thread.new do
         letters.each do |a|
-          letters.each do |a|
-            letters.each do |a|
-              letters.each do |b|
-                letters.each do |c|
-                  letters.each do |c|
-                    domain_name = "#{a}#{b}#{c}#{surfix}"
+          letters.each do |b|
+            letters.each do |c|
+              letters.each do |d|
+                letters.each do |e|
+                  letters.each do |f|
+                    domain_name = "#{a}#{b}#{c}#{d}#{e}#{f}#{surfix}"
                     test domain_name
                   end
                 end
@@ -68,11 +69,11 @@ class Domains < Sinatra::Base
 
       Thread.new do
         letters.each do |a|
-          letters.each do |a|
-            letters.each do |a|
-              letters.each do |b|
-                letters.each do |c|
-                  domain_name = "#{a}#{b}#{c}#{surfix}"
+          letters.each do |b|
+            letters.each do |c|
+              letters.each do |d|
+                letters.each do |e|
+                    domain_name = "#{a}#{b}#{c}#{d}#{e}#{surfix}"
                   test domain_name
                 end
               end
