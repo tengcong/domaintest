@@ -4,7 +4,8 @@ require 'whois'
 class Domains < Sinatra::Base
 
   # SURFIX = ['.com', '.net']
-  SURFIX = ['.cc', '.me', '.info']
+  SURFIX = ['.com']
+  # SURFIX = ['.cc', '.me', '.info']
 
   def initialize
     @limit = Time.now + 60*60*24*7
@@ -31,17 +32,35 @@ class Domains < Sinatra::Base
   end
 
   def run
+    puts '.... start ....'
     numbers = (1 ... 999).to_a
     letters = ('a' .. 'z').to_a
     digitals = (0 .. 9).to_a
     SURFIX.each do |surfix|
 
+      # Thread.new do
+      #   digitals.each do |a|
+      #     digitals.each do |b|
+      #       digitals.each do |c|
+      #         domain_name = "#{a}#{b}#{c}#{surfix}"
+      #         test domain_name
+      #       end
+      #     end
+      #   end
+      # end
+
       Thread.new do
-        digitals.each do |a|
-          digitals.each do |b|
-            digitals.each do |c|
-              domain_name = "#{a}#{b}#{c}#{surfix}"
-              test domain_name
+        letters.each do |a|
+          letters.each do |a|
+            letters.each do |a|
+              letters.each do |b|
+                letters.each do |c|
+                  letters.each do |c|
+                    domain_name = "#{a}#{b}#{c}#{surfix}"
+                    test domain_name
+                  end
+                end
+              end
             end
           end
         end
@@ -49,10 +68,14 @@ class Domains < Sinatra::Base
 
       Thread.new do
         letters.each do |a|
-          letters.each do |b|
-            letters.each do |c|
-              domain_name = "#{a}#{b}#{c}#{surfix}"
-              test domain_name
+          letters.each do |a|
+            letters.each do |a|
+              letters.each do |b|
+                letters.each do |c|
+                  domain_name = "#{a}#{b}#{c}#{surfix}"
+                  test domain_name
+                end
+              end
             end
           end
         end

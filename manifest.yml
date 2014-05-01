@@ -1,8 +1,8 @@
 ---
 applications:
-- name: domains
-  memory: 1G
-  instances: 2
-  host: domains
+- name: domain2
+  memory: 128M
+  instances: 1
+  host: domain2
   domain: cfapps.io
   path: .
